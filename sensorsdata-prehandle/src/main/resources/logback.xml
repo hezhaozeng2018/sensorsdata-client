@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%-16(%d{MM-dd HH:mm:ss.SSS}) %-5level %logger{1} - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="file"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/data/sensorslogs/prehandle/sensorsdata.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>/data/sensorslogs/prehandle/sensorsdata.%d{yyyyMMdd}.%i.log</FileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>sensorsdata|%date|%level|[%thread]|%logger|%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="file" />
+    </root>
+
+</configuration>
